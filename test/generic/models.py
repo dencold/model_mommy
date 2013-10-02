@@ -32,9 +32,42 @@ class ModelWithImpostorField(models.Model):
 class Profile(models.Model):
     email = models.EmailField()
 
-class User(models.Model):
-    profile = models.ForeignKey(Profile, blank=True, null=True)
+class A1(models.Model):
+    class Meta:
+        abstract = True
+    chunda = models.FloatField()
 
+class A2(models.Model):
+    class Meta:
+        abstract = True
+    loxa = models.FloatField()
+
+class A3(models.Model):
+    class Meta:
+        abstract = True
+    jalim = models.FloatField()
+
+from polymorphic import PolymorphicModel
+class User(PolymorphicModel, A1, A2, A3):
+    profile = models.ForeignKey(Profile, blank=True, null=True)
+    normal = models.CharField(max_length=30)
+
+    def save(self, *args, **kwargs):
+        self.normal = 'fulano'
+        return super(User, self).save(*args, **kwargs)
+
+class ProblematicUser(User):
+    class Meta:
+        abstract = True
+    foo = models.IntegerField()
+
+class ImOutOfIdeas(ProblematicUser):
+    class Meta:
+        abstract = True
+    spam = models.IntegerField()
+
+class LessProblematicUser(ImOutOfIdeas):
+    bar = models.IntegerField()
 
 class PaymentBill(models.Model):
     user = models.ForeignKey(User)

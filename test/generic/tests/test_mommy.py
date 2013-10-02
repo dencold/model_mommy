@@ -305,3 +305,9 @@ class SkipDefaultsTestCase(TestCase):
         self.assertEqual(dummy.default_decimal_field, Decimal('0'))
         self.assertEqual(dummy.default_email_field, 'foo@bar.org')
         self.assertEqual(dummy.default_slug_field, 'a-slug')
+
+class TestTroubledInheritance(TestCase):
+    def test_esta_merda(self):
+        from test.generic.models import LessProblematicUser, User
+        mommy.make(LessProblematicUser)
+        mommy.make(LessProblematicUser)

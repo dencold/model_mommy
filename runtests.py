@@ -26,6 +26,7 @@ def configure_settings(options):
                 }
             },
             INSTALLED_APPS = (
+                'polymorphic',
                 'django.contrib.contenttypes',
                 'test.generic',
                 'test.ambiguous',
