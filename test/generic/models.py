@@ -37,9 +37,6 @@ class User(PolymorphicModel):
     profile = models.ForeignKey(Profile, blank=True, null=True)
     normal = models.CharField(max_length=30)
 
-    def save(self, *args, **kwargs):
-        self.normal = 'fulano'
-        return super(User, self).save(*args, **kwargs)
 
 class ProblematicUser(User):
     class Meta:
