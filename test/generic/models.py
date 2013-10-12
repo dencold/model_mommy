@@ -32,23 +32,8 @@ class ModelWithImpostorField(models.Model):
 class Profile(models.Model):
     email = models.EmailField()
 
-class A1(models.Model):
-    class Meta:
-        abstract = True
-    chunda = models.FloatField()
-
-class A2(models.Model):
-    class Meta:
-        abstract = True
-    loxa = models.FloatField()
-
-class A3(models.Model):
-    class Meta:
-        abstract = True
-    jalim = models.FloatField()
-
 from polymorphic import PolymorphicModel
-class User(PolymorphicModel, A1, A2, A3):
+class User(PolymorphicModel):
     profile = models.ForeignKey(Profile, blank=True, null=True)
     normal = models.CharField(max_length=30)
 
